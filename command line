@@ -1,0 +1,27 @@
+% foci text files and .mat file will be created and saved in current folder.       
+
+p = inputParser;
+defaultasymmetry=false;
+addRequired(p,'filename',@ischar);
+addParameter(p,'asymmetry',defaultasymmetry,@islogical);
+parse(p,filename,varargin{:});
+fileid=p.Results.filename;
+rawdata=readtable(fileid);
+emo=unique(rawdata{:,{'group'}});
+titletmp=unique(rawdata{:,{'title'}});
+varnametmp=rawdata.Properties.VariableNames;
+varname=varnametmp(~ismember(varnametmp,{'X','Y','Z','decrease'}));
+dataall={};
+for i=1:length(titletmp)
+    onestu=rawdata(strcmp(rawdata.title,titletmp(i)),:);
+    for j=1:length(varname)
+        tmp=onestu{1,varname(j)};
+        if iscell(tmp)
+            dataall(i).(varname{j})=tmp{1};
+        else
+            dataall(i).(varname{j})=tmp;
+        end
+    end
+    emotmp=unique(onestu{:,{'group'}});
+    % save foci data
+    for k=1:size(emotmp,1)
