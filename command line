@@ -1,5 +1,5 @@
 % foci text files and .mat file will be created and saved in current folder.       
-
+sfddgfdgf
 p = inputParser;
 defaultasymmetry=false;
 addRequired(p,'filename',@ischar);
@@ -25,3 +25,5 @@ for i=1:length(titletmp)
     emotmp=unique(onestu{:,{'group'}});
     % save foci data
     for k=1:size(emotmp,1)
+sdfsfsgdg
+dgfdgfdfgdfg
